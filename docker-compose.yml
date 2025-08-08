@@ -8,7 +8,7 @@ services:
       - ./.docker/mysql/my.cnf:/etc/mysql/mysql.conf.d/custom.cnf
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: fastapi_ocr
+      MYSQL_DATABASE: fastapi
       MYSQL_USER: admin
       MYSQL_PASSWORD: admin
     ports:
