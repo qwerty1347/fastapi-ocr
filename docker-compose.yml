@@ -1,14 +1,14 @@
 services:
   mysql:
     image: mysql:5.7
-    container_name: fastapi-mysql
+    container_name: fastapi_ocr-mysql
     command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     volumes:
       - ./.docker/mysql/data:/var/lib/mysql
       - ./.docker/mysql/my.cnf:/etc/mysql/mysql.conf.d/custom.cnf
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: fastapi
+      MYSQL_DATABASE: fastapi_ocr
       MYSQL_USER: admin
       MYSQL_PASSWORD: admin
     ports:
@@ -18,7 +18,7 @@ services:
 
   mongo:
     image: mongo:latest
-    container_name: fastapi-mongo
+    container_name: fastapi_ocr-mongodb
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
@@ -33,7 +33,7 @@ services:
     build:
       context: .
       dockerfile: .docker/Dockerfile
-    container_name: fastapi
+    container_name: fastapi_ocr
     volumes:
       - ./:/app
     ports:
