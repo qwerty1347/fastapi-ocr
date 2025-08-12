@@ -5,7 +5,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 from http import HTTPStatus
 
 from common.constants.http_code import HttpCodeConstants
-from common.response import error_response
+from common.utils.response import error_response
 
 
 async def global_exception_handler(request: Request, exc: Exception) -> JSONResponse:

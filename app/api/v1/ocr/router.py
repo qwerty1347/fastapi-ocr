@@ -7,7 +7,7 @@ from app.domain.ocr.schemas.request import OcrRequest
 from app.domain.ocr.services.service import OcrService
 from app.domain.ocr.validators.file import validate_upload_file
 from common.constants.route import RouteConstants
-from common.response import success_response
+from common.utils.response import success_response
 
 
 router = APIRouter(prefix=RouteConstants.OCR_PREFIX, tags=[RouteConstants.OCR_TAG])
