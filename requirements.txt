@@ -45,3 +45,9 @@ beanie==1.29.0                # ODM based on Pydantic + Motor (MongoDB document 
 # HTTP Client
 # -----------------------------
 httpx                         # HTTP client with async/sync support (used for calling external APIs, testing, etc.)
+
+# -----------------------------
+# Testing
+# -----------------------------
+pytest                        # Python testing framework / test runner
+pytest-asyncio                # pytest plugin to test async functions (async def) in FastAPI
