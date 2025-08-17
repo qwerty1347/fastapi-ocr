@@ -47,6 +47,11 @@ beanie==1.29.0                # ODM based on Pydantic + Motor (MongoDB document 
 httpx                         # HTTP client with async/sync support (used for calling external APIs, testing, etc.)
 
 # -----------------------------
+# JWT Token Handling
+# -----------------------------
+python-jose[cryptography]     # JWT creation and verification using cryptographic algorithms
+
+# -----------------------------
 # Testing
 # -----------------------------
 pytest                        # Python testing framework / test runner
