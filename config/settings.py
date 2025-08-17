@@ -13,6 +13,11 @@ class Settings(BaseSettings):
     LOG_PATH: str
     UPLOAD_PATH: str
 
+    JWT_EXPIRE_MINUTES: int
+    JWT_SECRET_KEY: str
+    JWT_ALGORITHM: str
+    JWT_SUBJECT: str
+
     CLOVA_OCR_SECRET_KEY: str
     CLOVA_OCR_APIGW_INVOKE_URL: str
 
