@@ -1,12 +1,14 @@
 # FastAPI OCR 서비스
 
 FastAPI 기반의 OCR 서비스로, EasyOCR, PaddleOCR, ClovaOCR 등 다양한 OCR 엔진을 지원합니다. 이미지에서 텍스트를 추출하는 API를 제공하며, 모듈화된 구조로 쉽게 확장이 가능합니다.
+또한, JWT 인증을 통해 안전하게 API 접근을 제어할 수 있어 신뢰성 높은 서비스를 제공합니다.
 
 
 ## 🚀 프로젝트 개요
 
 다양한 OCR 엔진을 지원하는 API 서비스를 구현합니다. 주요 특징으로는:
 - FastAPI 기반의 고성능 비동기 API 서버
+- JWT 기반 인증을 통한 안전한 API 접근
 - Docker를 통한 컨테이너화된 개발 환경
 - 다양한 OCR 엔진 지원 (EasyOCR, PaddleOCR, ClovaOCR)
 - 모듈화된 아키텍처로 쉽게 새로운 OCR 엔진 추가 가능
@@ -44,9 +46,14 @@ fastapi-ocr/
 │   ├── api/                  # API 엔드포인트
 │   │   └── v1/               # API 버전 1
 │   │       └── ocr/          # OCR 관련 API
+│   │       └── token/        # JWT 관련 API
 │   │   └── router_collector.py
 │   │
 │   └── domain/               # 도메인 로직
+│       └── auth/              # 인증 도메인 로직
+│           ├── dependencies/  # 의존성 주입
+│           └── services/      # 비즈니스 로직
+│
 │       └── ocr/              # OCR 도메인 로직
 │           ├── dependencies/  # 의존성 주입
 │           ├── engines/       # OCR 엔진 구현체
@@ -84,6 +91,7 @@ fastapi-ocr/
 ## ✨ 기능 목록
 
 - [x] 멀티 OCR 엔진 지원 (EasyOCR, PaddleOCR, ClovaOCR)
+- [x] JWT 기반 인증 적용 (Bearer Token)
 - [x] 비동기 API 엔드포인트
 - [x] 파일 업로드 및 처리
 - [x] 모듈화된 아키텍처
