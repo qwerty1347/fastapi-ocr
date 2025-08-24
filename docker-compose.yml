@@ -37,9 +37,12 @@ services:
     volumes:
       - ./:/app
     ports:
-      - "9093:9093"
+      - "9093:8000"
     networks:
       - local_network
+    environment:
+      DB_HOST: fastapi_ocr-mysql
+      MONGO_DB_HOST: fastapi_ocr-mongodb
 
 networks:
   local_network:
