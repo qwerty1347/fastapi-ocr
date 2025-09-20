@@ -5,8 +5,8 @@ from typing import Any
 
 async def http_get(
     url: str,
-    params: dict[str, object] | None = None,
-    headers: dict[str, object] | None = None,
+    params: dict[str, Any] | None = None,
+    headers: dict[str, Any] | None = None,
     timeout: int = 10
 ) -> httpx.Response | None:
     async with httpx.AsyncClient(timeout=timeout) as client:
@@ -15,8 +15,8 @@ async def http_get(
 
         매개변수:
         - url (str): 요청할 URL
-        - params (dict[str, object] | None): 요청 쿼리 매개변수 (기본값: None)
-        - headers (dict[str, object] | None): 요청 헤더 (기본값: None)
+        - params (dict[str,Any] | None): 요청 쿼리 매개변수 (기본값: None)
+        - headers (dict[str, Any] | None): 요청 헤더 (기본값: None)
         - timeout (int): 타임아웃 시간 (기본값: 10초)
 
         반환값:
