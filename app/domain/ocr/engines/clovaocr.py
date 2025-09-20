@@ -5,7 +5,7 @@ import uuid
 from fastapi import UploadFile
 
 from app.domain.ocr.engines.base_engine import BaseEngine
-from common.helpers.http_clinet import http_post
+from common.helpers.http_client import http_post
 from common.utils.file import get_file_extension
 from config.settings import settings
 
