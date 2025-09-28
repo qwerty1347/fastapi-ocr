@@ -39,7 +39,7 @@ FastAPI 기반의 OCR 서비스로, EasyOCR, PaddleOCR, ClovaOCR 등 다양한 O
 
 
 ### Swagger UI
-[Notion에서 보기](https://www.notion.so/fastapi-OCR-API-27c4e65ad8338002bb64cf104b0d2edd)
+[Notion에서 보기](https://www.notion.so/fastapi-OCR-API-27c4e65ad8338002bb64cf104b0d2edd?source=copy_link)
 
 
 ## 🏗️ 프로젝트 구조
