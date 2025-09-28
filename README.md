@@ -20,7 +20,7 @@ FastAPI 기반의 OCR 서비스로, EasyOCR, PaddleOCR, ClovaOCR 등 다양한 O
 ![기술 스택](storage/screenshots/tech-stack.png)
 
 ### 주요 버전 정보
-- **Python**: 3.8+
+- **Python**: 3.11
 - **FastAPI**: 0.110.0
 - **Pydantic**: 2.11.5
 - **OCR 엔진**:
@@ -32,9 +32,14 @@ FastAPI 기반의 OCR 서비스로, EasyOCR, PaddleOCR, ClovaOCR 등 다양한 O
   - aiomysql 0.2.0 (비동기 MySQL 클라이언트)
   - motor 3.7.1 (비동기 MongoDB 클라이언트)
 
+
 ### 개발 도구
 - 테스트: pytest, pytest-asyncio
-- 문서화: Swagger UI, ReDoc (FastAPI 기본 제공)
+- 문서화: Swagger UI, ReDoc
+
+
+### Swagger UI
+[Notion에서 보기](https://www.notion.so/fastapi-OCR-API-27c4e65ad8338002bb64cf104b0d2edd)
 
 
 ## 🏗️ 프로젝트 구조
