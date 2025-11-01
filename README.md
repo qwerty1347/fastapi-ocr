@@ -39,9 +39,13 @@ FastAPI 기반의 OCR 서비스로, EasyOCR, PaddleOCR, ClovaOCR 등 다양한 O
 
 
 ## 📸 실행 화면
+### 샘플 이미지
 ![샘플 이미지](storage/screenshots/sample.png)
+### Naver Clova OCR 추출 결과
 ![Naver Clova OCR 추출 결과](storage/screenshots/clovaocr.PNG)
+### EasyOCR 추출 결과
 ![EasyOCR 추출 결과](storage/screenshots/easyocr.PNG)
+### PaddleOCR 추출 결과
 ![PaddleOCR 추출 결과](storage/screenshots/paddleocr.PNG)
 
 
