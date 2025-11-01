@@ -38,6 +38,13 @@ FastAPI 기반의 OCR 서비스로, EasyOCR, PaddleOCR, ClovaOCR 등 다양한 O
 - 문서화: Swagger UI, ReDoc
 
 
+## 📸 실행 화면
+![샘플 이미지](storage/screenshots/sample.png)
+![Naver Clova OCR 추출 결과](storage/screenshots/clovaocr.PNG)
+![EasyOCR 추출 결과](storage/screenshots/easyocr.PNG)
+![PaddleOCR 추출 결과](storage/screenshots/paddleocr.PNG)
+
+
 ### Swagger UI
 [Notion에서 보기](https://www.notion.so/fastapi-OCR-API-27c4e65ad8338002bb64cf104b0d2edd?source=copy_link)
 
