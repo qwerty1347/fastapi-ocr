@@ -19,8 +19,9 @@ class EasyOcr(BaseEngine):
 
     def convert_to_json(self, ocr_result) -> dict:
         result = {
-            "images": []
+            "images": [],
         }
+        full_text = ""
 
         for poly, text, confidence in ocr_result:
             bounding_poly: list[list[int]] = [[int(vertex[0]), int(vertex[1])] for vertex in poly]
@@ -29,5 +30,8 @@ class EasyOcr(BaseEngine):
                 "text": text,
                 "confidence": float(confidence)
             })
+            full_text += text + " "
+
+        result["full_text"] = full_text
 
         return result

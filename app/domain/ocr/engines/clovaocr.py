@@ -16,7 +16,8 @@ class ClovaOcr(BaseEngine):
 
     async def recognize(self, file: UploadFile) -> dict:
         post_url, files, headers = await self.build_form_data(file)
-        return await http_post(post_url, files=files, headers=headers)
+        ocr_result = await http_post(post_url, files=files, headers=headers)
+        return self.parse_inferText(ocr_result)
 
 
     def convert_to_json(self, ocr_result):
@@ -49,3 +50,18 @@ class ClovaOcr(BaseEngine):
         }
 
         return post_url, files, headers
+
+
+    def parse_inferText(self, ocr_result) -> str:
+        infer_texts =[]
+
+        for image in ocr_result.get("images", []):
+            for field in image.get("fields", []):
+                infer_text = field.get("inferText")
+
+                if infer_text:
+                    infer_texts.append(infer_text)
+
+        ocr_result['full_text'] = " ".join(infer_texts)
+
+        return ocr_result

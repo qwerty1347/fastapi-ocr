@@ -20,6 +20,7 @@ class PaddleOcr(BaseEngine):
         result = {
             "images": []
         }
+        full_text = ""
 
         polys = ocr_result[0].get("rec_polys", [])
         texts = ocr_result[0].get("rec_texts", [])
@@ -32,5 +33,8 @@ class PaddleOcr(BaseEngine):
                 "text": text,
                 "confidence": float(confidence)
             })
+            full_text += text + " "
+
+        result["full_text"] = full_text
 
         return result
