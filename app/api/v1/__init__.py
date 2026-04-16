@@ -1,12 +1,18 @@
+import pkgutil
+import importlib
+
 from fastapi import APIRouter
 
-from common.constants.route import RouteConstants
-from common.utils.router import auto_include_domain_routers
 
+api_router = APIRouter(prefix="/v1")
 
-api_v1_router = APIRouter(prefix=RouteConstants.API_V1_PREFIX)
+for module in pkgutil.iter_modules(__path__):
+    try:
+        router_module = importlib.import_module(
+            f"{__name__}.{module.name}.router"
+        )
+        api_router.include_router(router_module.router)
 
-auto_include_domain_routers(
-    parent_router=api_v1_router,
-    base_package="app.api.v1",
-)
+    except ModuleNotFoundError as e:
+        print(f"{__name__}.{module.name} import 실패 {e}")
+        continue

@@ -36,6 +36,7 @@ services:
     container_name: fastapi_ocr
     volumes:
       - ./:/app
+      - venv_data:/app/.venv
     ports:
       - "9093:8000"
     networks:
@@ -43,6 +44,9 @@ services:
     environment:
       DB_HOST: fastapi_ocr-mysql
       MONGO_DB_HOST: fastapi_ocr-mongodb
+
+volumes:
+    venv_data:
 
 networks:
   local_network:
