@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, UploadFile
 from fastapi.encoders import jsonable_encoder
 
 from app.core.utils.response import success_response
+from app.dependencies.auth import verify_access_token
 from app.dependencies.file import get_ocr_validated_file
 from app.dependencies.ocr import parse_ocr_request
 from app.schemas.ocr.request import OcrRequest
@@ -16,7 +17,7 @@ def index():
     return {"message": "Hello OCR"}
 
 
-@router.post('/')
+@router.post('/', dependencies=[Depends(verify_access_token)])
 async def do_ocr(
     file: UploadFile = Depends(get_ocr_validated_file),
     ocr_dto: OcrRequest = Depends(parse_ocr_request)

@@ -8,6 +8,10 @@ class Config(BaseSettings):
         extra="allow"
     )
 
+    JWT_EXPIRE_MINUTES: int
+    JWT_SECRET_KEY: str
+    JWT_ALGORITHM: str
+    JWT_SUBJECT: str
     CLOVA_OCR_APIGW_INVOKE_URL: str
     CLOVA_OCR_SECRET_KEY: str
     STORAGE_PATH: str
