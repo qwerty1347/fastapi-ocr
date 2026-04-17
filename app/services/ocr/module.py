@@ -1,13 +1,15 @@
 from fastapi import UploadFile
 
-from app.core.logging import get_logger
+from app.module.ocr.clovaocr import ClovaOcr
 from app.module.ocr.easyocr import EasyOcr
+from app.module.ocr.paddleocr import PaddleOcr
 
-logger = get_logger()
 
 class OcrModule:
     OCR_ENGINES = {
-        "easyocr": EasyOcr()
+        "easyocr": EasyOcr(),
+        "paddleocr": PaddleOcr(),
+        "clovaocr": ClovaOcr()
     }
 
     def __init__(self, engine: str):

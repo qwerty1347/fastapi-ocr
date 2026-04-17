@@ -2,7 +2,7 @@ from http import HTTPStatus
 from fastapi.responses import JSONResponse
 
 
-def success_response(code: int = HTTPStatus.OK, data: dict | None = None) -> JSONResponse:
+def success_response(data: dict | None = None, code: int = HTTPStatus.OK) -> JSONResponse:
     """
     성공 응답을 반환하는 함수
 

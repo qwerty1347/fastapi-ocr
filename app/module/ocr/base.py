@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from pathlib import Path
 
 
 class BaseEngine(ABC):
@@ -7,7 +8,7 @@ class BaseEngine(ABC):
 
 
     @abstractmethod
-    async def recognize(self, file_path: str):
+    async def recognize(self, file_path: Path):
         pass
 
 

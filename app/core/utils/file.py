@@ -44,7 +44,6 @@ async def save_file(file: UploadFile) -> Path:
     반환값:
     - Path: 저장된 파일의 경로
     """
-    contents = await file.read()
     upload_dir = Path(config.STORAGE_PATH) / "uploads" / "ocr"
     file_name = f"{int(time.time())}.{get_file_extension(file.filename)}"
     file_path = upload_dir / file_name
@@ -52,7 +51,8 @@ async def save_file(file: UploadFile) -> Path:
     upload_dir.mkdir(parents=True, exist_ok=True)
 
     with file_path.open('wb') as f:
-        f.write(contents)
+        content = await file.read()
+        f.write(content)
 
     return file_path
 
