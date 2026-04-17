@@ -15,11 +15,6 @@ from app.services.ocr.ocr import OcrService
 router = APIRouter(prefix="/ocr", tags=["OCR"])
 ocr_service = OcrService()
 
-@router.get('/')
-def index():
-    return {"message": "Hello OCR"}
-
-
 @router.post(
     '/',
     response_model=OcrResponse,

@@ -17,4 +17,13 @@ class OcrModule:
 
 
     async def recognize(self, file: UploadFile):
+        """
+        OCR 엔진을 사용하여 업로드된 이미지 파일에서 텍스트를 추출하는 함수
+
+        Args:
+            file (UploadFile): 업로드 이미지 파일
+
+        Returns:
+            dict: 추출된 텍스트 정보
+        """
         return await self.engine.recognize(file)
