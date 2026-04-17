@@ -1,4 +1,5 @@
 FROM python:3.11
+## paddleocr 호환
 
 WORKDIR /app
 

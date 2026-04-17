@@ -3,20 +3,40 @@ name = "fastapi-ocr"
 version = "0.1.0"
 requires-python = ">=3.11"
 dependencies = [
-    "fastapi==0.135.3",
-    "uvicorn[standard]==0.44.0",
-    "pydantic==2.13.0",
-    "pydantic_settings==2.13.1",
-    "celery",
-    "redis",
-    "flower",
-    "pytest",
-    "pytest-asyncio",
-    "python-dotenv",
-    "httpx",
-    "python-jose[cryptography]",
-    "python-multipart",
-    "easyocr==1.7.2",
-    "paddleocr==2.9.1",
-    "paddlepaddle==2.6.2"
+    # Web framework
+    "fastapi==0.135.3",                 # ASGI 웹 프레임워크
+    "uvicorn[standard]==0.44.0",        # ASGI 서버 (auto-reload, uvloop 등 포함)
+    "python-multipart",                 # multipart/form-data 파싱 (파일 업로드)
+
+    # Validation & settings
+    "pydantic==2.13.0",                 # 데이터 검증 / 직렬화
+    "pydantic_settings==2.13.1",        # 환경변수 기반 설정 관리
+
+    # Auth
+    "python-jose[cryptography]",        # JWT 인코딩/디코딩
+
+    # HTTP client
+    "httpx",                            # 비동기 HTTP 클라이언트 (외부 API 호출용)
+
+    # Async task queue
+    "celery",                           # 비동기 작업 큐
+    "redis",                            # Celery 브로커 / 결과 백엔드
+    "flower",                           # Celery 모니터링 대시보드
+
+    # Database
+    "SQLAlchemy",                       # MYSQL ORM
+    "aiomysql",                         # MySQL 비동기 드라이버
+    "alembic",                          # DB 마이그레이션 도구
+
+    # OCR engines
+    "easyocr==1.7.2",                   # OCR 엔진
+    "paddleocr==2.9.1",                 # OCR 엔진
+    "paddlepaddle==2.6.2",              # PaddleOCR 백엔드 딥러닝 프레임워크
+
+    # Test
+    "pytest",                           # 테스트 프레임워크
+    "pytest-asyncio",                   # pytest 비동기 지원
+
+    # Dev utils
+    "python-dotenv",                    # .env 파일 로더
 ]
