@@ -44,6 +44,32 @@ services:
     environment:
       DB_HOST: fastapi_ocr-mysql
       MONGO_DB_HOST: fastapi_ocr-mongodb
+      CELERY_BROKER_URL: redis://fastapi_ocr-redis:6379/0
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:7-alpine
+    container_name: fastapi_ocr-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - local_network
+
+  celery:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+    container_name: fastapi_ocr-celery
+    command: celery -A app.celery_worker worker --loglevel=info
+    networks:
+      - local_network
+    environment:
+      DB_HOST: fastapi_ocr-mysql
+      MONGO_DB_HOST: fastapi_ocr-mongodb
+      CELERY_BROKER_URL: redis://fastapi_ocr-redis:6379/0
+    depends_on:
+      - redis
 
 volumes:
     venv_data:

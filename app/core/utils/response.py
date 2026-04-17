@@ -7,8 +7,8 @@ def success_response(data: dict | None = None, code: int = HTTPStatus.OK) -> JSO
     성공 응답을 반환하는 함수
 
     Args:
-        code (int): 성공 응답의 상태 코드. Defaults to 200.
         data (dict | None): 성공 응답의 데이터. Defaults to None.
+        code (int): 성공 응답의 상태 코드. Defaults to 200.
 
     Returns:
         JSONResponse: 성공 응답을 포함하는 FastAPI JSONResponse 객체.

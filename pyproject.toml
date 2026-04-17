@@ -1,19 +1,22 @@
 [project]
 name = "fastapi-ocr"
 version = "0.1.0"
-requires-python = ">=3.12"
+requires-python = ">=3.11"
 dependencies = [
     "fastapi==0.135.3",
     "uvicorn[standard]==0.44.0",
-    "pydantic",
-    "pydantic_settings",
+    "pydantic==2.13.0",
+    "pydantic_settings==2.13.1",
+    "celery",
+    "redis",
+    "flower",
     "pytest",
     "pytest-asyncio",
     "python-dotenv",
     "httpx",
     "python-jose[cryptography]",
     "python-multipart",
-    "easyocr",
-    "paddleocr",
-    "paddlepaddle"
+    "easyocr==1.7.2",
+    "paddleocr==2.9.1",
+    "paddlepaddle==2.6.2"
 ]
