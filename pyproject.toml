@@ -1,3 +1,8 @@
+# 모든 버전은 핀 고정 권장. 실제 설치 시에는 uv.lock에 박제된 transitive 의존성까지 포함해
+# Dockerfile의 `uv sync --frozen`으로 재현성 있게 설치된다.
+# pyproject.toml = 원하는 의존성 명세, uv.lock = 실제로 깐 정확한 버전 + 해시.
+# 버전 미지정 항목(notebook 등)은 lock에 처음 박제된 시점의 버전이 그대로 유지됨.
+
 [project]
 name = "fastapi-ocr"
 version = "0.1.0"
@@ -10,7 +15,19 @@ dependencies = [
 
     # Validation & settings
     "pydantic==2.13.0",                 # 데이터 검증 / 직렬화
-    "pydantic_settings==2.13.1",        # 환경변수 기반 설정 관리
+    "pydantic-settings==2.13.1",        # 환경변수 기반 설정 관리
+
+    # Test
+    "pytest",                           # 테스트 프레임워크
+    "pytest-asyncio",                   # pytest 비동기 지원
+
+    # Notebook (실험/탐색용)
+    "notebook",                         # Jupyter Notebook 서버 (notebooks/ 디렉터리 사용)
+
+    # Async task queue
+    "celery",                           # 비동기 작업 큐 (OCR 배치 처리)
+    "redis",                            # Celery 브로커 / 결과 백엔드
+    "flower",                           # Celery 모니터링 대시보드 (포트 5555)
 
     # Auth
     "python-jose[cryptography]",        # JWT 인코딩/디코딩
@@ -18,24 +35,15 @@ dependencies = [
     # HTTP client
     "httpx",                            # 비동기 HTTP 클라이언트 (외부 API 호출용)
 
-    # Async task queue
-    "celery",                           # 비동기 작업 큐
-    "redis",                            # Celery 브로커 / 결과 백엔드
-    "flower",                           # Celery 모니터링 대시보드
-
     # Database
-    "SQLAlchemy",                       # MYSQL ORM
+    "SQLAlchemy",                       # MySQL ORM
     "aiomysql",                         # MySQL 비동기 드라이버
     "alembic",                          # DB 마이그레이션 도구
 
     # OCR engines
-    "easyocr==1.7.2",                   # OCR 엔진
-    "paddleocr==2.9.1",                 # OCR 엔진
+    "easyocr==1.7.2",                   # 다국어 지원 OCR (PyTorch 기반)
+    "paddleocr==2.9.1",                 # 고정밀 OCR (PaddlePaddle 기반)
     "paddlepaddle==2.6.2",              # PaddleOCR 백엔드 딥러닝 프레임워크
-
-    # Test
-    "pytest",                           # 테스트 프레임워크
-    "pytest-asyncio",                   # pytest 비동기 지원
 
     # Dev utils
     "python-dotenv",                    # .env 파일 로더
