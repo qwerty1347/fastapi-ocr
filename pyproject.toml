@@ -37,6 +37,7 @@ dependencies = [
 
     # Database
     "SQLAlchemy==2.0.49",               # MySQL ORM
+    "pymysql==1.1.2",                   # MySQL 동기 드라이버
     "aiomysql==0.3.2",                  # MySQL 비동기 드라이버
     "alembic==1.18.4",                  # DB 마이그레이션 도구
 
