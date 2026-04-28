@@ -1,7 +1,7 @@
 import enum
 
 from sqlalchemy import JSON, Column, DateTime, Enum, String, func
-from app.infrastructure.database.base import Base
+from app.models.base import Base
 
 
 class JobStatus(str, enum.Enum):

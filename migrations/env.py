@@ -18,8 +18,8 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-from app.infrastructure.database.base import Base
-from app.infrastructure.database import models  # noqa: F401  (모델 등록)
+from app.models.base import Base
+from app import models  # noqa: F401  (모델 등록)
 target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
