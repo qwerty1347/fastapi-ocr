@@ -67,7 +67,7 @@ fastapi-ocr/
 │   │       ├── paddleocr.py
 │   │       └── clovaocr.py
 │   ├── schemas/
-│   │   ├── common.py                # SuccessResponse / ErrorResponse 공통 봉투
+│   │   ├── base.py                  # SuccessResponse / ErrorResponse 공통 봉투
 │   │   ├── enums.py                 # OcrEngine Enum
 │   │   ├── ocr/                     # OCR request/response 스키마
 │   │   └── token/                   # Token response 스키마
@@ -75,7 +75,6 @@ fastapi-ocr/
 │   │   ├── auth/jwt.py              # JWT 발급/검증 서비스
 │   │   └── ocr/                     # OCR 비즈니스 로직
 │   ├── tasks/                       # Celery 태스크
-│   ├── celery_worker.py             # Celery 워커 엔트리포인트
 │   └── main.py                      # FastAPI 애플리케이션 엔트리포인트
 ├── config/
 │   └── settings.py

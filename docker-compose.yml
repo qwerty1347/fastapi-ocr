@@ -5,7 +5,6 @@ services:
     command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     volumes:
       - ./.docker/mysql/data:/var/lib/mysql
-      - ./.docker/mysql/my.cnf:/etc/mysql/mysql.conf.d/custom.cnf
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: fastapi
@@ -39,17 +38,17 @@ services:
       - venv_data:/app/.venv
     ports:
       - "9093:8000"
+      - "8888:8888"
     networks:
       - local_network
     environment:
+      SERVICE_TYPE: app
       DB_HOST: fastapi_ocr-mysql
       MONGO_DB_HOST: fastapi_ocr-mongodb
       CELERY_BROKER_URL: redis://fastapi_ocr-redis:6379/0
-    depends_on:
-      - redis
 
   redis:
-    image: redis:7-alpine
+    image: redis:latest
     container_name: fastapi_ocr-redis
     ports:
       - "6379:6379"
@@ -61,15 +60,34 @@ services:
       context: .
       dockerfile: .docker/Dockerfile
     container_name: fastapi_ocr-celery
-    command: celery -A app.celery_worker worker --loglevel=info
+    volumes:
+      - ./:/app
+      - venv_data:/app/.venv
     networks:
       - local_network
     environment:
+      SERVICE_TYPE: worker
+      CELERY_BROKER_URL: redis://fastapi_ocr-redis:6379/0
+      CELERY_RESULT_BACKEND: redis://fastapi_ocr-redis:6379/1
       DB_HOST: fastapi_ocr-mysql
       MONGO_DB_HOST: fastapi_ocr-mongodb
+
+  flower:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+    container_name: fastapi_ocr-flower
+    volumes:
+      - ./:/app
+      - venv_data:/app/.venv
+    ports:
+      - "5555:5555"
+    networks:
+      - local_network
+    environment:
+      SERVICE_TYPE: flower
       CELERY_BROKER_URL: redis://fastapi_ocr-redis:6379/0
-    depends_on:
-      - redis
+      CELERY_RESULT_BACKEND: redis://fastapi_ocr-redis:6379/1
 
 volumes:
     venv_data:

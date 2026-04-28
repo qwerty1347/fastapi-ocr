@@ -8,14 +8,20 @@ class Config(BaseSettings):
         extra="allow"
     )
 
+    DB_HOST: str
+    DB_PORT: int
+    DB_DATABASE: str
+    DB_USERNAME: str
+    DB_PASSWORD: str
+    CELERY_BROKER_URL: str
+    CELERY_RESULT_BACKEND: str
     JWT_EXPIRE_MINUTES: int
     JWT_SECRET_KEY: str
     JWT_ALGORITHM: str
     JWT_SUBJECT: str
+    STORAGE_PATH: str
     CLOVA_OCR_APIGW_INVOKE_URL: str
     CLOVA_OCR_SECRET_KEY: str
-    STORAGE_PATH: str
-    CELERY_BROKER_URL: str = "redis://localhost:6379/0"
 
 
 config = Config()
