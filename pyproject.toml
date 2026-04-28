@@ -18,16 +18,16 @@ dependencies = [
     "pydantic-settings==2.13.1",        # 환경변수 기반 설정 관리
 
     # Test
-    "pytest",                           # 테스트 프레임워크
-    "pytest-asyncio",                   # pytest 비동기 지원
+    "pytest==9.0.3",                    # 테스트 프레임워크
+    "pytest-asyncio==1.3.0",            # pytest 비동기 지원
 
     # Notebook (실험/탐색용)
-    "notebook",                         # Jupyter Notebook 서버 (notebooks/ 디렉터리 사용)
+    "notebook==7.5.5",                  # Jupyter Notebook 서버 (notebooks/ 디렉터리 사용)
 
     # Async task queue
-    "celery",                           # 비동기 작업 큐 (OCR 배치 처리)
-    "redis",                            # Celery 브로커 / 결과 백엔드
-    "flower",                           # Celery 모니터링 대시보드 (포트 5555)
+    "celery==5.6.3",                    # 비동기 작업 큐 (OCR 배치 처리)
+    "redis==7.4.0",                     # Celery 브로커 / 결과 백엔드
+    "flower==2.0.1",                    # Celery 모니터링 대시보드 (포트 5555)
 
     # Auth
     "python-jose[cryptography]",        # JWT 인코딩/디코딩
@@ -36,9 +36,9 @@ dependencies = [
     "httpx",                            # 비동기 HTTP 클라이언트 (외부 API 호출용)
 
     # Database
-    "SQLAlchemy",                       # MySQL ORM
-    "aiomysql",                         # MySQL 비동기 드라이버
-    "alembic",                          # DB 마이그레이션 도구
+    "SQLAlchemy==2.0.49",               # MySQL ORM
+    "aiomysql==0.3.2",                  # MySQL 비동기 드라이버
+    "alembic==1.18.4",                  # DB 마이그레이션 도구
 
     # OCR engines
     "easyocr==1.7.2",                   # 다국어 지원 OCR (PyTorch 기반)

@@ -9,10 +9,9 @@ case "$SERVICE_TYPE" in
         exec uv run jupyter notebook --ip=0.0.0.0 --port=8888 --allow-root --no-browser --notebook-dir=/app/notebooks
         ;;
     worker)
-        # 여러 큐 처리 가능하도록 수정
         exec uv run celery -A app.worker.celery_app worker \
             --loglevel=info \
-            -Q default \
+            -Q ocr \
             --concurrency=2
         ;;
     flower)

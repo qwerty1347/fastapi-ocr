@@ -15,7 +15,8 @@ class Config(BaseSettings):
     CLOVA_OCR_APIGW_INVOKE_URL: str
     CLOVA_OCR_SECRET_KEY: str
     STORAGE_PATH: str
-    CELERY_BROKER_URL: str = "redis://localhost:6379/0"
+    CELERY_BROKER_URL: str
+    CELERY_RESULT_BACKEND: str
 
 
 config = Config()
