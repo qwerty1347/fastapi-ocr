@@ -6,7 +6,7 @@ from app.core.utils.response import success_response
 from app.core.dependencies.auth import verify_access_token
 from app.core.dependencies.file import get_ocr_validated_file
 from app.core.dependencies.ocr import parse_ocr_request
-from app.schemas.common import ErrorResponse
+from app.schemas.base import ErrorResponse
 from app.schemas.ocr.request import OcrRequest
 from app.schemas.ocr.response import OcrResponse
 from app.services.ocr.ocr import OcrService

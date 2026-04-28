@@ -66,6 +66,4 @@ celery.conf.update(
 )
 
 
-# 태스크 모듈을 import 해 등록한다. 현재 OCR 프로젝트는 app/tasks/ 아래에 태스크가 있다.
-# (imageSearch는 app/worker/tasks/ 사용 — 향후 일관성 위해 통일 검토)
-import app.tasks  # noqa: F401, E402
+import app.worker.tasks  # noqa: F401, E402

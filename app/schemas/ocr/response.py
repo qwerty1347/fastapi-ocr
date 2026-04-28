@@ -1,4 +1,4 @@
-from app.schemas.common import SuccessResponse
+from app.schemas.base import SuccessResponse
 
 
 OcrResponse = SuccessResponse[dict]

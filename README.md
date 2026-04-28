@@ -67,7 +67,7 @@ fastapi-ocr/
 │   │       ├── paddleocr.py
 │   │       └── clovaocr.py
 │   ├── schemas/
-│   │   ├── common.py                # SuccessResponse / ErrorResponse 공통 봉투
+│   │   ├── base.py                  # SuccessResponse / ErrorResponse 공통 봉투
 │   │   ├── enums.py                 # OcrEngine Enum
 │   │   ├── ocr/                     # OCR request/response 스키마
 │   │   └── token/                   # Token response 스키마

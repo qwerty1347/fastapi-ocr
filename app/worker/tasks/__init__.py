@@ -1,0 +1,1 @@
+from app.worker.tasks import add  # noqa: F401
