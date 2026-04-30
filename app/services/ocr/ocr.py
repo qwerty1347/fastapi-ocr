@@ -22,3 +22,7 @@ class OcrService():
         ocr_engine = OcrModule(engine)
         result = await ocr_engine.recognize(file)
         return result
+
+
+    def do_job_ocr(self):
+        pass
