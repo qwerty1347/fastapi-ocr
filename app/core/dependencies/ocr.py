@@ -1,7 +1,12 @@
-from fastapi import Form
+from fastapi import Depends, Form
+from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.core.dependencies.database import get_database
+from app.repositories.ocr import OcrRepository
 from app.schemas.enums import OcrEngine
 from app.schemas.ocr.request import OcrRequest
+from app.services.ocr.job import OcrJobService
+from app.services.ocr.ocr import OcrService
 
 
 def parse_ocr_request(engine: OcrEngine = Form(...)) -> OcrRequest:
@@ -15,3 +20,15 @@ def parse_ocr_request(engine: OcrEngine = Form(...)) -> OcrRequest:
         OcrRequest: OcrRequest 객체
     """
     return OcrRequest(engine=engine)
+
+
+def get_ocr_service() -> OcrService:
+    return OcrService()
+
+
+def get_ocr_repository(db: AsyncSession = Depends(get_database)) -> OcrRepository:
+    return OcrRepository(db)
+
+
+def get_ocr_job_service(db: AsyncSession = Depends(get_database)) -> OcrJobService:
+    return OcrJobService(db, OcrRepository(db))
