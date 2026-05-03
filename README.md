@@ -41,41 +41,7 @@
 
 ## 아키텍처
 
-### 컴포넌트
-
-```
-                    ┌──────────────────────┐
-                    │    Client (browser)   │
-                    └───────────┬───────────┘
-                                │ HTTPS
-                ┌───────────────▼────────────────┐
-                │   FastAPI app (uvicorn :8000)  │
-                │   - JWT verify                 │
-                │   - 동기 OCR (즉시 응답)       │
-                │   - 비동기 잡 등록/조회        │
-                └────┬─────────────────┬─────────┘
-                     │async            │enqueue
-              aiomysql│                  │
-                     │                  ▼
-            ┌────────▼─────────┐  ┌────────────────┐
-            │  MySQL 5.7        │  │  Redis 7        │
-            │  ocr_jobs 테이블 │  │  Celery broker  │
-            │                   │  │  + result back  │
-            └────────▲──────────┘  └────────┬───────┘
-              pymysql│                      │ pull
-                     │                      ▼
-            ┌────────┴─────────────────────────┐
-            │   Celery worker (-Q ocr)         │
-            │   - run_ocr 태스크               │
-            │   - sync Session으로 status 갱신 │
-            │   - OCR 엔진 호출 (sync)         │
-            └────────────────┬─────────────────┘
-                             │ observe
-                       ┌─────▼──────┐
-                       │  Flower    │
-                       │  (:5555)   │
-                       └────────────┘
-```
+![Architecture](storage/screenshots/architecture.png)
 
 ### 비동기 잡 라이프사이클
 
@@ -104,8 +70,8 @@
 ### 모듈 추상화 — OCR 엔진
 
 ```
-app/services/ocr/module.py            (lazy 캐시)
-        ┌──────────────────────────┐
+app/services/ocr/module.py
+        ┌───────────────────────────┐
         │  OcrModule                │
         │   _FACTORIES = {          │
         │     "easyocr": EasyOcr,   │
@@ -115,14 +81,14 @@ app/services/ocr/module.py            (lazy 캐시)
         └──────────┬────────────────┘
                    │ creates on first use
                    ▼
-        ┌──────────────────────────┐
+        ┌───────────────────────────┐
         │   BaseEngine (ABC)        │
         │   recognize(file_path)    │
         │   convert_to_json(result) │
         └──────────┬────────────────┘
         ┌──────────┼──────────┬──────────┐
         ▼          ▼          ▼
-   EasyOcr   PaddleOcr   ClovaOcr  ...
+        EasyOcr   PaddleOcr   ClovaOcr  ...
 ```
 
 엔진은 모두 **sync 메서드**(`recognize(file_path: Path)`)로 통일. API에서는 `asyncio.to_thread`로 감싸 이벤트 루프 블로킹을 회피하고, 워커에서는 직접 호출합니다.
