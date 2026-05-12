@@ -25,6 +25,65 @@ FastAPI 기반 OCR 서비스. EasyOCR · PaddleOCR · Naver Clova OCR 세 엔진
 ## 📦 프로젝트 구조
 
 ```text
+## 아키텍처
+
+![Architecture](storage/screenshots/architecture.png)
+
+### 비동기 잡 라이프사이클
+
+```
+[Client]            [API]               [MySQL]            [Redis]            [Worker]
+   │ POST /jobs       │                    │                  │                  │
+   ├─────────────────►│                    │                  │                  │
+   │                  │ INSERT pending     │                  │                  │
+   │                  ├───────────────────►│                  │                  │
+   │                  │ enqueue run_ocr    │                  │                  │
+   │                  ├───────────────────────────────────────►                  │
+   │ 202 {job_id}     │                    │                  │ pull             │
+   │◄─────────────────┤                    │                  ├─────────────────►│
+   │                  │                    │ UPDATE started   │                  │
+   │                  │                    │◄─────────────────────────────────── │
+   │                  │                    │                  │  do OCR (3~30s)  │
+   │                  │                    │ UPDATE success   │                  │
+   │                  │                    │◄─────────────────────────────────── │
+   │ GET /jobs/{id}   │                    │                  │                  │
+   ├─────────────────►│ SELECT             │                  │                  │
+   │                  ├───────────────────►│                  │                  │
+   │ {status,result}  │                    │                  │                  │
+   │◄─────────────────┤                    │                  │                  │
+```
+
+### 모듈 추상화 — OCR 엔진
+
+```
+app/services/ocr/module.py
+        ┌───────────────────────────┐
+        │  OcrModule                │
+        │   _FACTORIES = {          │
+        │     "easyocr": EasyOcr,   │
+        │     "paddleocr": PaddleOcr│
+        │     "clovaocr": ClovaOcr, │
+        │   }                       │
+        └──────────┬────────────────┘
+                   │ creates on first use
+                   ▼
+        ┌───────────────────────────┐
+        │   BaseEngine (ABC)        │
+        │   recognize(file_path)    │
+        │   convert_to_json(result) │
+        └──────────┬────────────────┘
+        ┌──────────┼──────────┬──────────┐
+        ▼          ▼          ▼
+        EasyOcr   PaddleOcr   ClovaOcr  ...
+```
+
+엔진은 모두 **sync 메서드**(`recognize(file_path: Path)`)로 통일. API에서는 `asyncio.to_thread`로 감싸 이벤트 루프 블로킹을 회피하고, 워커에서는 직접 호출합니다.
+
+---
+
+## 프로젝트 구조
+
+```
 fastapi-ocr/
 ├── .docker/
 │   ├── Dockerfile                       # python:3.11 + libgl1 + uv sync --frozen
