@@ -4,6 +4,5 @@ __pycache__/
 .venv
 /.docker/mysql/data
 /.docker/mongo/data
-/.vscode
 /storage/logs
 /storage/uploads/ocr
