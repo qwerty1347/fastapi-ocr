@@ -23,6 +23,7 @@ dependencies = [
 
     # Notebook (실험/탐색용)
     "notebook==7.5.5",                  # Jupyter Notebook 서버 (notebooks/ 디렉터리 사용)
+    "ipywidgets==8.1.8",                # Jupyter 위젯 지원 (tqdm progress bar, interactive UI 등)
 
     # Async task queue
     "celery==5.6.3",                    # 비동기 작업 큐 (OCR 배치 처리)
